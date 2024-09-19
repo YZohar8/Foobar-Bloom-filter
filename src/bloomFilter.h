@@ -5,8 +5,9 @@
 #include <vector>
 #include <functional>
 #include <string>
+# include <set>
 
-class bloomFilter
+class BloomFilter
 {
 private:
     size_t size;
