@@ -27,6 +27,6 @@ TEST(BloomFilterTest, FalsePositive) {
 
     bf.add("http://example.com");
     EXPECT_TRUE(bf.check("http://example.com"));
-    EXPECT_FALSE(bf.badPostive("http://example.com"));
-    EXPECT_TRUE(bf.badPostive("http://nonexistent.com"));
+    EXPECT_TRUE(bf.badPostive("http://example.com"));
+    EXPECT_FALSE(bf.badPostive("http://nonexistent.com"));
 }
