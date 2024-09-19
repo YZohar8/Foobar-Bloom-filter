@@ -1,6 +1,14 @@
 #include <gtest/gtest.h>
 #include "bloomFilter.h"
 
+size_t hash1 (const std::string& str) {
+    return std::hash<std::string>(str);
+}
+size_t hash1 (const std::string& str) {
+    return (std::hash<std::string>(str) * 17);
+}
+
+
 // Test cases
 TEST(BloomFilterTest, BasicOperations) {
     // Create BloomFilter with 100 bits and 2 hash functions
@@ -19,5 +27,6 @@ TEST(BloomFilterTest, FalsePositive) {
 
     bf.add("http://example.com");
     EXPECT_TRUE(bf.check("http://example.com"));
-    EXPECT_FALSE(bf.badPositive("http://example.com"));
-    EXPECT_TRUE(bf.badPositive("http://nonexistent.com"));
+    EXPECT_FALSE(bf.badPostive("http://example.com"));
+    EXPECT_TRUE(bf.badPostive("http://nonexistent.com"));
+}
