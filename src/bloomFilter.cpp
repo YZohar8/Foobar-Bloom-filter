@@ -31,6 +31,6 @@
     }
 
     bool BloomFilter::badPostive (const std::string& url) {
-        return bad_urls.find(url) != bad_urls.end;
+        return bad_urls.find(url) != bad_urls.end();
     }
 
