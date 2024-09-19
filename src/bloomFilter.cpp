@@ -3,22 +3,22 @@
 
 
 // Constructor
-    BloomFilter(size_t size, const std::vector<std::function<size_t(const std::string&)>>& hashFuncs)
+    BloomFilter::BloomFilter(size_t size, const std::vector<std::function<size_t(const std::string&)>>& hashFuncs)
         : size(size), hashFunctions(hashFuncs), bits(size, false) {}
 
 
-    void add (const std::string& url) {
+    void BloomFilter::add (const std::string& url) {
         int hash;
         for (const auto& hashFunction : hashFunctions)
         {
             hash = hashFunction(url) % size;
             bits[hash] = true;
         }
-        real_urls.insert(url);
+        bad_urls.insert(url);
         
     }
 
-    bool check (const std::string& url) {
+    bool BloomFilter::check (const std::string& url) {
         int hash;
         for (const auto& hashFunction : hashFunctions)
         {
@@ -30,9 +30,7 @@
         return true; // maybe is true postive (true but we claasified this false)
     }
 
-    bool badPostive (const std::string& url) {
+    bool BloomFilter::badPostive (const std::string& url) {
         return bad_urls.find(url) != bad_urls.end;
     }
-
-};
 

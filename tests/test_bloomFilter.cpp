@@ -2,10 +2,10 @@
 #include "bloomFilter.h"
 
 size_t hash1 (const std::string& str) {
-    return std::hash<std::string>(str);
+    return std::hash<std::string>()(str);
 }
-size_t hash1 (const std::string& str) {
-    return (std::hash<std::string>(str) * 17);
+size_t hash2 (const std::string& str) {
+    return (std::hash<std::string>()(str) * 17);
 }
 
 
