@@ -1,18 +1,15 @@
 #include <vector>
 #include <functional>
+#include <string>
 
 #include "HashFunction.h"
 
-std::function<size_t(const std::string&)> createHashFunction (int rounds) {
-    return [rounds](const std::string& str) -> size_t {
-        std::hash<std::string> hasher;
-        size_t hash_value = hasher(str); // Initial hash
-
-        // Apply std::hash 'n - 1' more times
+std::function<size_t(const std::string&)> createHashFunction(int rounds) {
+    return [rounds](const std::string& str) {
+        size_t hash = std::hash<std::string>()(str);
         for (int i = 1; i < rounds; ++i) {
-            hash_value = hasher(std::to_string(hash_value)); // Re-hash the result
+            hash = std::hash<size_t>()(hash); // Apply hash function multiple times
         }
-
-        return hash_value;
+        return hash;
     };
 }
