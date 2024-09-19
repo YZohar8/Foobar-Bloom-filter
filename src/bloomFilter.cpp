@@ -1,3 +1,7 @@
+// src/bloomFilter.h
+#ifndef BLOOMFILTER_H
+#define BLOOMFILTER_H
+
 #include <vector>
 #include <functional>
 #include <string>
