@@ -1,37 +1,42 @@
 cmake_minimum_required(VERSION 3.14)
 
-project("MybloomFilter") # Replace “MyCalc” with your repo name
-set(CMAKE_CXX_STANDARD 14)
+project(MyBloomFilter)
 
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Fetch GoogleTest
 include(FetchContent)
-
 FetchContent_Declare(
-googletest
-URL
-https://github.com/google/googletest/archive/03597a01ee50ed
-33e9dfd640b249b4be3799d395.zip
+    googletest
+    URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
 )
+FetchContent_MakeAvailable(googletest)
 
-enable_testing()
-
+# Set source files for the project
 set(SOURCE_FILES
-src/bloomFilter.cpp # this is where the code we want to test
+    src/bloomFilter.cpp
 )
 
+# Set test files
 set(TEST_FILES
-tests/test_main.cpp # this is the main for tests
-tests/bloomFilter_test.cpp # this file contain the tests
+    tests/test_main.cpp
+    tests/test_bloomFilter.cpp
 )
 
+# Create an executable for the tests
 add_executable(bloomFilterTests ${TEST_FILES})
 
-# Link Google Test to the test executable
+# Link the GoogleTest library to the test executable
 target_link_libraries(bloomFilterTests PRIVATE gtest gtest_main)
 
-# Include the source directory for tests
+# Link the source files to the test executable
+target_sources(bloomFilterTests PRIVATE ${SOURCE_FILES})
+
+# Include directories
 target_include_directories(bloomFilterTests PRIVATE src)
 
+# Enable testing and add test
+enable_testing()
 include(GoogleTest)
 add_test(NAME bloomFilterTests COMMAND bloomFilterTests)

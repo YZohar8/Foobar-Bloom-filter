@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include ".../src/bloomFilter.cpp"
+#include "bloomFilter.h"
 
 // Test cases
 TEST(BloomFilterTest, BasicOperations) {
