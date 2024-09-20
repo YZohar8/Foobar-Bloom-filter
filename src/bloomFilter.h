@@ -7,6 +7,7 @@
 #include <string>
 # include <set>
 
+// class bloom filter
 class BloomFilter
 {
 private:
