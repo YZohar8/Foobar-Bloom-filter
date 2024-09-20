@@ -3,6 +3,8 @@
 #include <vector>
 #include <functional>
 
+#include "bloomFilter.h"
+
 
 bool isValidInput (std::string& input) {
     for (char c : input)
