@@ -1,0 +1,26 @@
+name: Build And Run Tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up CMake
+        run: sudo apt-get install cmake
+
+      - name: Build and Run Tests
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+          ctest --output-on-failure
