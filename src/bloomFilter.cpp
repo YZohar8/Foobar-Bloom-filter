@@ -2,7 +2,7 @@
 
 
 
-// Constructor
+// Constructor to the class
     BloomFilter::BloomFilter(size_t size, const std::vector<std::function<size_t(const std::string&)>>& hashFuncs)
         : size(size), hashFunctions(hashFuncs), bits(size, false) {}
 
