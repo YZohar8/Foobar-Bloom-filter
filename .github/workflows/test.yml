@@ -1,40 +1,35 @@
-name: Build and Test
+name: Build And Run Tests
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y cmake g++ libgtest-dev
-
-      - name: Prepare GTest
         run: |
-          cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
+          sudo apt-get update
+          sudo apt-get install -y cmake g++ libgtest-dev
+
+      - name: Build Google Test
+        run: |
+          cd /usr/src/googletest
+          sudo cmake .
           sudo make
           sudo cp *.a /usr/lib
 
-      - name: Configure project using CMake
+      - name: Build and Run Tests
         run: |
-          mkdir -p build
+          mkdir build
           cd build
-          cmake ../src
-
-      - name: Build project
-        run: |
-          cd build
+          cmake ..
           make
-
-      - name: Run tests
-        run: |
-          cd build
           ctest --output-on-failure
