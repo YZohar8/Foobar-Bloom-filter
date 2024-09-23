@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(MyBloomFilter)
+project("MyBloomFilter")
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -11,12 +11,26 @@ FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
 )
-FetchContent_MakeAvailable(googletest)
+enable_testing()
+
+# Ensure Google Test is fetched
+FetchContent_GetProperties(googletest)
+if(NOT googletest_POPULATED)
+    FetchContent_Populate(googletest)
+    add_subdirectory(${googletest_SOURCE_DIR} ${googletest_BINARY_DIR})
+endif()
+
 
 # Set source files for the project
 set(SOURCE_FILES
     src/bloomFilter.cpp
+    src/HashFunction.cpp
+    src/logicToBloomFilter.cpp
 )
+
+# Include directories for source files
+include_directories(src)
+
 
 # Set test files
 set(TEST_FILES
@@ -24,19 +38,15 @@ set(TEST_FILES
     tests/test_bloomFilter.cpp
 )
 
-# Create an executable for the tests
-add_executable(bloomFilterTests ${TEST_FILES})
+# Include directories for test files
+include_directories(src ${googletest_SOURCE_DIR}/googletest/include)
 
-# Link the GoogleTest library to the test executable
-target_link_libraries(bloomFilterTests PRIVATE gtest gtest_main)
-
-# Link the source files to the test executable
-target_sources(bloomFilterTests PRIVATE ${SOURCE_FILES})
-
-# Include directories
-target_include_directories(bloomFilterTests PRIVATE src)
-
-# Enable testing and add test
-enable_testing()
+# Create a test executable
+add_executable(Tests ${TEST_FILES} ${SOURCE_FILES})
+target_link_libraries(Tests PRIVATE gtest_main)
 include(GoogleTest)
-add_test(NAME bloomFilterTests COMMAND bloomFilterTests)
+gtest_discover_tests(Tests)
+
+# Main application executable
+add_executable(MainApp src/main.cpp ${SOURCE_FILES})
+target_link_libraries(MainApp PRIVATE gtest_main)
