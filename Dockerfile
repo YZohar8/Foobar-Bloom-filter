@@ -1,27 +1,11 @@
-FROM ubuntu:20.04
+FROM gcc:latest
 
-RUN apt-get update && apt-get install -y \
-    g++ \
-    cmake \
-    git \
-    build-essential \
-    libgtest-dev \
-    lcov \
-    wget
+WORKDIR /usr/src/facebookasp
 
-RUN apt-get update && apt-get install -y cmake && \
-    cd /usr/src/gtest && \
-    cmake CMakeLists.txt && \
-    make && \
-    cp *.a /usr/lib
+COPY ./src/ .
 
-WORKDIR /app
-COPY . .
+RUN g++ -o facebookasp *.cpp
 
-RUN mkdir build
-WORKDIR /app/build
-RUN cmake .. && make
+EXPOSE 8081
 
-RUN ctest
-
-CMD ["./run"]
+CMD ["./facebookasp"]
