@@ -23,7 +23,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3  # Updated to the latest stable version
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: yzohar8/foobar-bloom-filter  # Replace with your Docker Hub username and image name
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3  # Using the latest version for improved performance and stability
@@ -32,5 +32,5 @@ jobs:
           file: ./Dockerfile
           push: true
           build-args: PORT=8081
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ${{ steps.meta.outputs.tags }}  # This will now include the correct tags
+          labels: ${{ steps.meta.outputs.labels }}
