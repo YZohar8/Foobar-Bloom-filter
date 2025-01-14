@@ -19,7 +19,43 @@ git clone https://github.com/Yzohar8/Foober-Bloom-Filter.git
 cmake -B build -S .
 cmake --build build
 ```
+### Step 3: Run Tests
 
+1. Run the tests using `ctest`:
+   ```bash
+   ctest --test-dir build --output-on-failure
+   ```
+
+2. Ensure all tests pass successfully.
+---
+
+### Step 4: Run the Application
+
+1. Execute the main program:
+   ```bash
+   ./build/<EXECUTABLE_NAME>
+   ```
+   Example:
+   - Enter inputs in the defined format (e.g., 1 [URL] or 2 [URL]) in the command line.
+
+
+### Step 5: Create a Docker Image
+
+1. Create a Dockerfile in the project root (if not already present).
+2. Build the Docker image:
+   ```bash
+   docker build -t <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG> .
+   ```
+3. Run the Docker image:
+   ```bash
+   docker run -it <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG>
+   ```
+4. Push the Docker image to DockerHub:
+   ```bash
+   docker push <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG>
+   ```
+
+---
 
 
 Enjoy!
