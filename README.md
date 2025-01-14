@@ -33,27 +33,10 @@ cmake --build build
 
 1. Execute the main program:
    ```bash
-   ./build/<EXECUTABLE_NAME>
+   ./build/MainApp
    ```
    Example:
    - Enter inputs in the defined format (e.g., 1 [URL] or 2 [URL]) in the command line.
-
-
-### Step 5: Create a Docker Image
-
-1. Create a Dockerfile in the project root (if not already present).
-2. Build the Docker image:
-   ```bash
-   docker build -t <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG> .
-   ```
-3. Run the Docker image:
-   ```bash
-   docker run -it <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG>
-   ```
-4. Push the Docker image to DockerHub:
-   ```bash
-   docker push <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG>
-   ```
 
 ---
 
