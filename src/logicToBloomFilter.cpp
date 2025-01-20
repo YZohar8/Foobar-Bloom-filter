@@ -9,18 +9,15 @@
 
 
 
-bool validateUrl(std::string &url) {
-    // Regular expression to validate a URL
+bool validateUrl(const std::string &url) {
     const std::regex urlRegex(
         R"(^(https?|ftp)://[^\s/$.?#].[^\s]*$)",
-        std::regex::icase // Case-insensitive
+        std::regex::icase
     );
-
-    // Check if the URL matches the regex
     return std::regex_match(url, urlRegex);
 }
 
-void getUrls(int command, const std::string &url, BloomFilter &bloomFilter) {
+bool getUrls(int command, const std::string &url, BloomFilter &bloomFilter) {
     if (!validateUrl(url)) {
         return false;
     }
@@ -30,7 +27,7 @@ void getUrls(int command, const std::string &url, BloomFilter &bloomFilter) {
     } else if (command == 2) {
         bool isBlacklisted = bloomFilter.check(url);
         if (isBlacklisted) {
-            return bloomFilter.badPostive(url) ? true : false; 
+            return bloomFilter.badPostive(url); 
         }
         return false; 
     }

@@ -1,7 +1,9 @@
 #include "global.h"
+#include <vector>
 
-portServer = 8081;
-countToResetTheBloomFilter = 2;
-bloomFilterSizeToReset = 512;
-roundsHashToReset.push_back(1);
-roundsHashToReset.push_back(2);
+
+int portServer = 8081;
+int countToResetTheBloomFilter = 2;
+size_t bloomFilterSizeToReset = 512;
+std::vector<size_t> roundsHashToReset = {1, 2};
+

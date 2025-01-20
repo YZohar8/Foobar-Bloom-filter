@@ -27,7 +27,7 @@ set(SOURCE_FILES
     src/HashFunction.cpp
     src/logicToBloomFilter.cpp
     src/global.cpp
-    src/server/cpp
+    src/server.cpp
 )
 
 # Include directories for source files
