@@ -41,4 +41,24 @@ cmake --build build
 ---
 
 
+### Docker Integration
+
+To make deployment easier, you can use Docker to build and run the server.
+
+1. **Build the Docker Image**:
+   ```bash
+   docker build -t bloom-filter <your-dockerhub-username>/bloom-filter:<tag> .
+   ```
+   Replace `<your-dockerhub-username>` with your Docker Hub username.
+
+2. **Push the Image to Docker Hub**:
+   ```bash
+   docker login
+   docker push <your-dockerhub-username>/bloom-filter:<tag>
+   ```
+   Replace `<your-dockerhub-username>` with your Docker Hub username.
+
+---
+
 Enjoy!
+
