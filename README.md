@@ -12,7 +12,9 @@ sudo apt-get install libgtest-dev cmake
 ## Installation
 1. Clone this repository:
 ```sh
-git clone https://github.com/Yzohar8/Foober-Bloom-Filter.git
+git clone https://github.com/YZohar8/Foobar-Bloom-filter.git
+cd Foobar-Bloom-filter
+git checkout Part-4
 ```
 2. Create and build a `build` directory using `cmake`:
 ```bash
