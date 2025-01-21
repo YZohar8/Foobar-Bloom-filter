@@ -2,6 +2,8 @@
 #define GLOBAL_H
 
 #include <vector>
+#include <cstddef>
+
 
 extern int portServer;
 extern int countToResetTheBloomFilter;
