@@ -15,22 +15,13 @@ sudo apt-get install libgtest-dev cmake
 git clone https://github.com/Yzohar8/Foober-Bloom-Filter.git
 ```
 2. Create and build a `build` directory using `cmake`:
-```sh
+```bash
 rm -rf build
 cmake -B build -S .
 cmake --build build
 ```
-### Step 3: Run Tests
 
-1. Run the tests using `ctest`:
-   ```bash
-   ctest --test-dir build --output-on-failure
-   ```
-
-2. Ensure all tests pass successfully.
----
-
-### Step 4: Run the Application
+### Run the Application
 
 1. Execute the main program:
    ```bash
@@ -41,6 +32,31 @@ cmake --build build
 
 ---
 
+# Alternative Way to Run the Project Using Docker
+
+If you'd like to run the project using Docker, you can do so by building a Docker image and running it as a container. This is an efficient and portable way to ensure the project runs in a consistent environment.
+
+## Steps to Run the Project
+
+1. Create and build a `build` directory using `cmake`:
+   ```bash
+   rm -rf build
+   cmake -B build -S .
+   cmake --build build
+   ```
+
+2. **Build the Docker Image**  
+   look to Docker Integration.
+
+3. **Run the Command**  
+   After the image is built, you can run the project by executing the following command:
+
+   ```bash
+   docker run -i -t -p 8081:8081 <your-dockerhub-username>/bloom-filter-server:<tag>
+   ```
+   Replace `<your-dockerhub-username>` with your Docker Hub username.
+
+
 
 ### Docker Integration
 
@@ -48,14 +64,15 @@ To make deployment easier, you can use Docker to build and run the server.
 
 1. **Build the Docker Image**:
    ```bash
-   docker build -t bloom-filter <your-dockerhub-username>/bloom-filter:<tag> .
+   docker build -t <your-dockerhub-username>/bloom-filter-server:<tag> .
    ```
    Replace `<your-dockerhub-username>` with your Docker Hub username.
 
 2. **Push the Image to Docker Hub**:
+   first login to your docker
    ```bash
    docker login
-   docker push <your-dockerhub-username>/bloom-filter:<tag>
+   docker push <your-dockerhub-username>/bloom-filter-server:<tag>
    ```
    Replace `<your-dockerhub-username>` with your Docker Hub username.
 

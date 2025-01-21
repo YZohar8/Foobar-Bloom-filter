@@ -10,12 +10,14 @@
 #include "server.h"
 #include "global.h"
 #include "logicToBloomFilter.h"
+#include "log.h"
 
 
 using namespace std;
 
 void handleClient(int client_socket, BloomFilter &bloomFilter)
 {
+    std::ostringstream oss;
     char buffer[4096];
     
     while (true)
@@ -30,6 +32,7 @@ void handleClient(int client_socket, BloomFilter &bloomFilter)
         if (bytes == 0)
         {
             std::cout << "Client disconnected." << std::endl;
+            appendToLog("Client disconnected.");
             break;  
         }
 
@@ -42,8 +45,14 @@ void handleClient(int client_socket, BloomFilter &bloomFilter)
         bool result = false;
         
         if (iss >> command >> url)
-        {
-            result = getUrls(command, url, bloomFilter); 
+        {   
+            oss << "command is: " << command << " and url is: " << url;
+            appendToLog(oss.str());
+            oss.str("");
+            result = getUrls(command, url, bloomFilter);
+            oss << "the result for this url: " << url <<  " is: " << result;
+            appendToLog(oss.str());
+            oss.str("");
         }
         
         if (result) {
@@ -61,6 +70,7 @@ void handleClient(int client_socket, BloomFilter &bloomFilter)
 
 int runServer(BloomFilter &bloomFilter)
 {
+    std::ostringstream oss;
     int sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0)
     {
@@ -89,6 +99,9 @@ int runServer(BloomFilter &bloomFilter)
     }
 
     cout << "Server is listening on port " << portServer << "..." << endl;
+    oss << "Server is listening on port " << portServer << "...";
+    appendToLog(oss.str());
+    oss.str("");
 
     while (true)
     {
@@ -105,6 +118,9 @@ int runServer(BloomFilter &bloomFilter)
         char *client_ip = inet_ntoa(client_addr.sin_addr);
         uint16_t client_port = ntohs(client_addr.sin_port); 
         std::cout << "New connection from " << client_ip << ":" << client_port << std::endl;
+        oss << "New connection from " << client_ip << ":" << client_port;
+        appendToLog(oss.str());
+        oss.str("");
 
 
         std::thread clientThread(handleClient, client_socket, std::ref(bloomFilter)); 

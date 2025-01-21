@@ -28,6 +28,7 @@ set(SOURCE_FILES
     src/logicToBloomFilter.cpp
     src/global.cpp
     src/server.cpp
+    src/log.cpp
 )
 
 # Include directories for source files

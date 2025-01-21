@@ -7,6 +7,7 @@
 #include "HashFunction.h"
 #include "global.h"
 #include "server.h"
+#include "log.h"
 
 int main() {
 
@@ -20,6 +21,7 @@ int main() {
     }
     //create bloom filter that based an information
     BloomFilter bloomFilter(bloomFilterSizeToReset, hash_functions);
+    openLogFile();
     runServer(bloomFilter);
     }
 

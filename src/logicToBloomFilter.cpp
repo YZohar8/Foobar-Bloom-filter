@@ -7,14 +7,17 @@
 
 #include "bloomFilter.h"
 
+using namespace std;
+
 
 
 bool validateUrl(const std::string &url) {
     const std::regex urlRegex(
-        R"(^(https?|ftp)://[^\s/$.?#].[^\s]*$)",
+        R"(\b(?:https?:\/\/|www\.)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(?:\.[a-zA-Z]{2,})?(?:\/[^\s]*)?\b)",
         std::regex::icase
     );
-    return std::regex_match(url, urlRegex);
+    bool result = std::regex_match(url, urlRegex);
+    return result;
 }
 
 bool getUrls(int command, const std::string &url, BloomFilter &bloomFilter) {
