@@ -16,6 +16,7 @@ git clone https://github.com/Yzohar8/Foober-Bloom-Filter.git
 ```
 2. Create and build a `build` directory using `cmake`:
 ```sh
+rm -rf build
 cmake -B build -S .
 cmake --build build
 ```
